@@ -207,7 +207,12 @@ class TouchManager {
       return;
     }
 
-    const origin = [(screen0X + screen1X) / 2, (screen0Y + screen1Y) / 2];
+    // The origin is used as a position in the viewer, so it must be in client
+    // coordinates; screen coordinates only match those in a fullscreen window.
+    const origin = [
+      (touch0.clientX + touch1.clientX) / 2,
+      (touch0.clientY + touch1.clientY) / 2,
+    ];
     this.#onPinching?.(origin, pDistance, distance);
   }
 
